@@ -7,9 +7,20 @@ function showMessage(text, type = "success") {
   setTimeout(() => (msg.innerHTML = ""), 2500);
 }
 
-async function loadUsers() {
-  const res = await fetch("/api/users");
-  const users = await res.json();
+require("dotenv").config();
+const mongoose = require("mongoose");
+
+const User = require("./models/User");
+const Product = require("./models/Product");
+const Order = require("./models/Order");
+
+
+async function loadOrders() {
+  const res = await fetch("/api/orders");
+  const data = await res.json();
+
+  console.log(data); // verify populated data
+}
 
   userList.innerHTML = "";
   if (!users.length) {
@@ -36,7 +47,6 @@ async function loadUsers() {
 
     userList.appendChild(item);
   });
-}
 
 userForm.addEventListener("submit", async (e) => {
   e.preventDefault();
