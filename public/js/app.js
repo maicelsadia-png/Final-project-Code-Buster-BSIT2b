@@ -7,19 +7,15 @@ function showMessage(text, type = "success") {
   setTimeout(() => (msg.innerHTML = ""), 2500);
 }
 
-require("dotenv").config();
-const mongoose = require("mongoose");
-
-const User = require("./models/User");
-const Product = require("./models/Product");
-const Order = require("./models/Order");
-
+async function loadUsers() { 
+  const res = await fetch("/api/users");
+  const users = await res.json();
+}
 
 async function loadOrders() {
   const res = await fetch("/api/orders");
   const data = await res.json();
 
-  console.log(data); // verify populated data
 }
 
   userList.innerHTML = "";
